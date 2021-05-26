@@ -25,12 +25,24 @@ namespace Demo.Gateway
 
             services
                 .AddGraphQLServer()
-                .AddQueryType(d => d.Name("Query"))
-                .AddRemoteSchema(Accounts, ignoreRootTypes: true)
+                //.AddQueryType(d => d.Name("Query"))
+                //.AddRemoteSchema(Accounts, ignoreRootTypes: true)
+                //.AddRemoteSchema(Inventory, ignoreRootTypes: true)
+                //.AddRemoteSchema(Products, ignoreRootTypes: true)
+                //.AddRemoteSchema(Reviews, ignoreRootTypes: true)
+
+                .AddRemoteSchema(Accounts, ignoreRootTypes:true)
                 .AddRemoteSchema(Inventory, ignoreRootTypes: true)
                 .AddRemoteSchema(Products, ignoreRootTypes: true)
                 .AddRemoteSchema(Reviews, ignoreRootTypes: true)
-                .AddTypeExtensionsFromFile("./Stitching.graphql");
+                .AddTypeExtensionsFromString("type Query { }")
+                .AddTypeExtensionsFromFile("../" + Accounts + "./Stitching.graphql")
+                .AddTypeExtensionsFromFile("../" + Products + "./Stitching.graphql")
+                .AddTypeExtensionsFromFile("../" + Inventory + "./Stitching.graphql")
+                .AddTypeExtensionsFromFile("../" + Reviews + "./Stitching.graphql");
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
